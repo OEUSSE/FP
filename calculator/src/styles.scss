@@ -1,0 +1,206 @@
+/*
+  Variables
+*/
+
+$bkg: #182F41;
+
+$top: #22394C;
+$number_color: white;
+
+$close_btn: #FF5750;
+$max_btn: #FFBE2F;
+$min_btn: #29CF42;
+
+$first_row: #516A7E;
+$second_row: #7C8F9E;
+$third_row: #A8B5BF;
+$fourth_row: #D3DADF;
+$fifth_row: #F6F6F6;
+$equal: #F29542;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: transparent;
+}
+
+body {
+  background-color: $bkg;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.calculator__container {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  margin: auto;
+  overflow: hidden;
+  width: 360px;
+
+  .calculator__screen {
+    background-color: $top;
+    border-top-left-radius: 1.2em;
+    border-top-right-radius: 1.2em;
+    height: 25%;
+
+    .calculator__nav {
+      height: 20%;
+      position: relative;
+
+      ul.nav__options {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        width: 55px;
+
+        li {
+          border-radius: 50%;
+          cursor: pointer;
+          height: 12px;
+          width: 12px;
+
+          &:nth-child(1) {
+            background: $close_btn;
+          }
+          &:nth-child(2) {
+            background: $max_btn;
+          }
+          &:nth-child(3) {
+            background: $min_btn;
+          }
+        }
+      }
+    }
+
+    .calculator__display {
+      height: 80%;
+      position: relative;
+
+      .display__operation {
+        align-items: center;
+        height: 30%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1em;
+
+        span.operation {
+          color: $third_row;
+          font-family: sans-serif;
+          font-weight: 800;
+          font-size: 1.8em;
+        }
+      }
+
+      input {
+        background-color: $top;
+        border: none;
+        bottom: 0;
+        box-sizing: border-box;
+        color: $number_color;
+        font-weight: 600;
+        font-size: 4em;
+        height: 70%;
+        padding: 0 .2em .2em .1em;
+        position: absolute;
+        text-align: right;
+        outline: none;
+        width: 100%;
+      }
+    }
+  }
+
+  .calculator__buttons {
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      height: 33.33%;
+
+      @mixin color-outline($color) {
+        outline: 1.5px solid $color;
+      }
+
+      &:nth-child(1) {
+        .button__container button {
+          background: $first_row;
+          color: #D3DADF;
+          @include color-outline(#486073);
+        }
+      }
+
+      &:nth-child(2) {
+        .button__container button {
+          background: $second_row;
+          color: $number_color;
+          @include color-outline(#6B7D8A);
+        }
+      }
+
+      &:nth-child(3) {
+        .button__container button {
+          background: $third_row;
+          color: $number_color;
+          @include color-outline(#909EA8);
+        }
+      }
+
+      &:nth-child(4) {
+        .button__container button {
+          background: $fourth_row;
+          color: $first_row;
+          @include color-outline(#BBC4CA);
+        }
+      }
+
+      &:nth-child(5) {
+        .button__container button {
+          background: $fifth_row;
+          color: $first_row;
+          @include color-outline(#D4D6D8);
+        }
+        .button__container button.equal__btn {
+          background-color: $equal;
+          color: $number_color;
+        }
+      }
+
+      .button__container {
+        button {
+          border: none;
+          cursor: pointer;
+          font-size: 1.5em;
+          height: 100%;
+          text-transform: uppercase;
+          width: 100%;
+
+          .equal_btn {
+            background-color: $equal;
+          }
+        }
+      }
+      .normal__button {
+        width: 33.33%;
+      }
+      .cero__button {
+        width: 67%;
+        button {
+          text-align: left;
+          padding-left: 1.6em;
+        }
+      }
+    }    
+  }
+}
+
+

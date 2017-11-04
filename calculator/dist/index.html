@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div class="calculator__container">
+    <div class="calculator__screen">
+      <div class="calculator__nav">
+        <ul class="nav__options">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="calculator__display">
+        <div class="display__operation">
+          <span class="operation"></span>
+        </div>
+        <input type="text" id="display">
+      </div>
+    </div>
+    <div class="calculator__buttons">
+      <div class="row">
+        <div class="button__container normal__button"><button data-number="ac">ac</button></div>
+        <div class="button__container normal__button"><button data-number="±">+/-</button></div>
+        <div class="button__container normal__button"><button data-number="%">%</button></div>
+        <div class="button__container normal__button"><button data-number="/">/</button></div>
+      </div>
+      <div class="row">
+        <div class="button__container normal__button"><button data-number="7">7</button></div>
+        <div class="button__container normal__button"><button data-number="8">8</button></div>
+        <div class="button__container normal__button"><button data-number="9">9</button></div>
+        <div class="button__container normal__button"><button data-number="*">*</button></div>
+      </div>
+      <div class="row">
+        <div class="button__container normal__button"><button data-number="4">4</button></div>
+        <div class="button__container normal__button"><button data-number="5">5</button></div>
+        <div class="button__container normal__button"><button data-number="6">6</button></div>
+        <div class="button__container normal__button"><button data-number="-">-</button></div>
+      </div>
+      <div class="row">
+        <div class="button__container normal__button"><button data-number="1">1</button></div>
+        <div class="button__container normal__button"><button data-number="2">2</button></div>
+        <div class="button__container normal__button"><button data-number="3">3</button></div>
+        <div class="button__container normal__button"><button data-number="+">+</button></div>
+      </div>
+      <div class="row">
+        <div class="button__container cero__button"><button data-number="0">0</button></div>
+        <div class="button__container normal__button"><button data-number=".">.</button></div>
+        <div class="button__container normal__button"><button class="equal__btn" data-number="=">=</button></div>
+      </div>
+    </div>
+  </div>
+  <script src="./bundle.js"></script>
+</body>
+</html>
