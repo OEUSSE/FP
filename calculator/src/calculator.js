@@ -59,7 +59,15 @@ function inputFromKeyboard(e) {
 
 function getResultOperation(operation) {
   try {
-    let result = eval(operation);
+    let result;
+
+    if (operation.includes('√')) {
+      operation = operation.replace('√', '');
+      result = Math.sqrt(operation);
+    } else {
+      result = eval(operation);
+    }
+        
     const isValid = new Boolean(result); // No tomar como valor falsy.
 
     if (result % 1 !== 0)
