@@ -1,5 +1,4 @@
 /**
- * @todo poner foco cuando los valores vienen desde el teclado.
  * @todo Si se quiere hacer una operación con el resultado de una previa operación, al momento de 
  * eliminar no se puede eliminar todo.
  */
@@ -35,6 +34,7 @@ function validation (key) {
       inOperation = false;
     }
   }
+  display.blur();
 }
 
 function inputFromCalculator(e) {
@@ -64,11 +64,11 @@ function inputFromKeyboard(e) {
 
 function getResultOperation(operation) {
   let result = eval(operation);
+  const isValid = new Boolean(result); // No tomar como valor falsy.
 
   if (result % 1 !== 0)
     result = result.toFixed(2);
 
-  const isValid = new Boolean(result); // si es uno no lo tome como valor falsy
   try {
     if (isValid) {
       displayOp.textContent = operation;
@@ -88,6 +88,7 @@ function deleteNumber() {
 }
 
 function setFocus() {
+  debugger
   if (display.selectionStart || display.selectionStart == '0') {
     var elemLen = display.value.length;
     display.selectionStart = elemLen;
