@@ -1,13 +1,8 @@
-/**
- * @todo Si se quiere hacer una operación con el resultado de una previa operación, al momento de 
- * eliminar no se puede eliminar todo.
- */
-
 const display = document.querySelector('#display');
 const displayOp = document.querySelector('.operation');
 const config = { specialKey: '/*-.+±%' };
 let initWithCero = false;
-let inOperation = false; // Bandera para validar la no concatenación continua de operadores -> (8++5)
+let inOperation = false;
 let thereIsDecimal = false;
 
 function validation (key) {
@@ -63,13 +58,13 @@ function inputFromKeyboard(e) {
 }
 
 function getResultOperation(operation) {
-  let result = eval(operation);
-  const isValid = new Boolean(result); // No tomar como valor falsy.
-
-  if (result % 1 !== 0)
-    result = result.toFixed(2);
-
   try {
+    let result = eval(operation);
+    const isValid = new Boolean(result); // No tomar como valor falsy.
+
+    if (result % 1 !== 0)
+      result = result.toFixed(2);
+  
     if (isValid) {
       displayOp.textContent = operation;
       display.value = result;
@@ -88,9 +83,8 @@ function deleteNumber() {
 }
 
 function setFocus() {
-  debugger
   if (display.selectionStart || display.selectionStart == '0') {
-    var elemLen = display.value.length;
+    let elemLen = display.value.length;
     display.selectionStart = elemLen;
     display.selectionEnd = elemLen;
     display.focus();
@@ -104,7 +98,7 @@ function init() {
   display.focus();
 }
 
-init()
+init();
 
 document.querySelectorAll('button').forEach((button) => button.addEventListener('mousedown', inputFromCalculator));
 document.body.addEventListener('keydown', inputFromKeyboard);
