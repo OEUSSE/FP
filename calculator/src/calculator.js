@@ -1,70 +1,73 @@
 /**
- * @todo validar las operaciones con decimal.
  * @todo poner foco cuando los valores vienen desde el teclado.
+ * @todo Si se quiere hacer una operación con el resultado de una previa operación, al momento de 
+ * eliminar no se puede eliminar todo.
  */
 
 const display = document.querySelector('#display');
 const displayOp = document.querySelector('.operation');
+const config = { specialKey: '/*-.+±%' };
 let initWithCero = false;
 let inOperation = false; // Bandera para validar la no concatenación continua de operadores -> (8++5)
 let thereIsDecimal = false;
-const config = {
-  specialKey: '/*-+±%'
-}
 
-function validation (tecla) {
+function validation (key) {
   if (initWithCero) {
-    if (config.specialKey.includes(tecla)) {
-      display.value += tecla;
+    if (config.specialKey.includes(key)) {
+      display.value += key;
       initWithCero = !initWithCero;
       inOperation = true;
-    } else if (tecla !== '0') {
+    } 
+    else if (key !== '0') {      
       display.value = '';
-      display.value += tecla;
+      display.value += key;
       initWithCero = !initWithCero;
     }
-  } else if (!initWithCero && !displayOp.value) {
-    if (config.specialKey.includes(tecla) && inOperation) return false;
-    else if (config.specialKey.includes(tecla) && !inOperation) {
-      display.value += tecla;
+  } 
+  else if (!initWithCero && !displayOp.value) {
+    if (config.specialKey.includes(key) && inOperation) return false;
+    else if (config.specialKey.includes(key) && !inOperation) {
+      display.value += key;
       inOperation = true;
-    } else {
-      display.value += tecla;
+    }
+    else {
+      display.value += key;
       inOperation = false;
     }
   }
 }
 
 function inputFromCalculator(e) {
-  const tecla = e.target.dataset.number;
-  if (tecla === '=') {
+  const key = e.target.dataset.number;
+  if (key === '=') {
     return getResultOperation(display.value);
-  } else if (tecla === 'ac') {
+  } else if (key === 'ac') {
     return deleteNumber();
   }
-  validation(tecla);
+  validation(key);
 }
 
 function inputFromKeyboard(e) {
   e.preventDefault();
-  const keyConfig = {
-    Backspace: 'ac',
-    Enter: '='
-  }
-  const tecla = e.key;
+  const keyConfig = { Backspace: 'ac', Enter: '=' };
+  const key = e.key;
   const regex = /\b[0-9]|[/*+.%±=]|[-]|Backspace|Enter/g;
-  if (regex.test(tecla)) {
-    if (keyConfig[tecla] === '=') {
+  if (regex.test(key)) {
+    if (keyConfig[key] === '=') {
       return getResultOperation(display.value);
-    } else if (keyConfig[tecla] === 'ac') {
+    } else if (keyConfig[key] === 'ac') {
       return deleteNumber();
     }
-    validation(tecla)
+    validation(key)
   }
 }
 
 function getResultOperation(operation) {
-  const result = eval(operation);
+  let result = eval(operation);
+
+  if (result % 1 !== 0)
+    result = result.toFixed(2);
+
   const isValid = new Boolean(result); // si es uno no lo tome como valor falsy
   try {
     if (isValid) {
