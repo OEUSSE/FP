@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: inherit;
+  width: 100%;
+}

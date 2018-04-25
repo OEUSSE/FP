@@ -1,0 +1,139 @@
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  cursor: pointer;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  box-shadow: 0 1px 5px rgba(0,0,0,.5);
+}
+
+.game-info {
+  /* margin-left: 20px; */
+}
+
+.App {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game {
+  display: flex;
+  justify-content: space-around;
+  min-height: 260px;
+  padding: .7em;
+  width: 30%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50px, 1fr));
+  grid-template-rows: 1fr;
+  grid-auto-rows: 30px;
+}
+
+.sorting-btn-container {
+  margin-top: .5em
+}
+
+.sorting-btn-container span {
+  line-height: 1.5em;
+}
+
+.sorting-btn-container button {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  cursor: pointer;
+  line-height: 1.5;
+  margin-left: .2em;
+  outline: none;
+  padding: 0 .5em;
+  text-transform: uppercase;
+}
+
+.sorting-btn-container button.asc { background-color: orange; }
+
+.sorting-btn-container button.desc { background-color: orangered; }
+
+.win-square {
+  background-color: lawngreen;
+}
+
+.game-board {
+  align-self: center;
+  justify-self: center;
+}
+
+ol {
+  display: grid;
+  grid-gap: .2rem;
+  grid-template-columns: repeat(2, minmax(50px, 1fr));
+  list-style: none;
+}
+
+ol * button {
+  background: none;
+  border: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 2;
+  outline: none;
+  padding: 0 1em;
+  width: 100%;
+}
+
+li.go-start {
+  grid-column: 1 / -1;
+  margin: .7em 0;
+}
+
+ol li button {
+  transition: background 200ms ease-in-out;
+}
+
+ol li:not(.go-start) button[aria-checked="true"] {
+  background-color: #4e98ff87;
+}
+
+li.go-start button {
+  background-color: #59e63680;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.position-info {
+  margin-top: 1em;
+}
+
+.position-info p > span {
+  display: inherit;
+}
