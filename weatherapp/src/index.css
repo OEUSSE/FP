@@ -1,0 +1,28 @@
+:root {
+  --background-color: #f1f1f1;
+  --current-forecast-color: hsl(241, 100%, 80%);
+  --weekly-forecast-color: #fff;
+  --detials-current-color: #fff;
+  --details-weekly-color: #a9a9a9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body, #root {
+  align-items: center;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}

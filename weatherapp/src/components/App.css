@@ -1,0 +1,20 @@
+.weather-app {
+  box-shadow: 0px 6px 20px 3px rgba(0, 0, 0, .2);
+  display: grid;
+  grid-template-columns: 18em 1fr;
+  grid-template-rows: repeat(2, 220px);
+  max-width: 90%;
+  min-width: 70%;
+}
+
+.current-forecast {
+  background-color: var(--current-forecast-color);
+  color: var(--detials-current-color);
+  grid-row: 1 / -1;
+}
+
+.weekly-forecast {
+  background-color: var(--weekly-forecast-color);
+  color: var(--detials-weekly-color);
+  grid-row: 1 / -1;
+}
