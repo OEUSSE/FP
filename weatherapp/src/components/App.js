@@ -1,5 +1,5 @@
 /**
- * @todo Maquetar el disño de la app
+ * @todo Maquetar el diseño de la app
  * @todo Obtener información del clima de la ciudad en la cual se está. (Datos por coordenadas)
  * @todo Obtener información del clima de cualquier ciudad. (Buscador de ciudad)
  * @todo Obtener información del clima semanal.
