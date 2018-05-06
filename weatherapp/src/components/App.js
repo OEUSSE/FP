@@ -34,10 +34,13 @@ class App extends Component {
     const API_KEY = '25f380e69779eacfe18a294d4679d939'
     const { latitude, longitude } = await this.getCoords()
 
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${API_KEY}&lat=${latitude}&lon=${longitude}&units=metric`)
-    const data = await response.json()
+    const responseCurrently = await fetch(`https://api.openweathermap.org/data/2.5/weather?&APPID=${API_KEY}&lat=${latitude}&lon=${longitude}&units=metric`)
+    const dataCurrently = await responseCurrently.json()
 
-    console.log(data)
+    const responseWeekly = await fetch(`https://api.openweathermap.org/data/2.5/forecast?&APPID=${API_KEY}&lat=${latitude}&lon=${longitude}&units=metric`)
+    const dataWeekly = await responseWeekly.json()
+
+    console.log(dataWeekly)
 
     const today = new Date()
     const [ dayWeek, month, day, year ] = today.toDateString().toString().split(' ')
@@ -46,10 +49,10 @@ class App extends Component {
     this.setState({
       currentlyForecast: {
         date,
-        city: data.city.name + ', ' + data.city.country,
-        icon: data.list[0].weather[0].main,
-        description: data.list[0].weather[0].description,
-        temp: Math.floor(data.list[0].main.temp)
+        city: `${dataCurrently.name}, ${dataCurrently.sys.country}`,
+        icon: (dataCurrently.weather[0].main).toLowerCase(),
+        description: dataCurrently.weather[0].description,
+        temp: Math.floor(dataCurrently.main.temp)
       }
     })
   }

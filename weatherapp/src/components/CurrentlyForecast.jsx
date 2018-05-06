@@ -15,7 +15,7 @@ class CurrentlyForecast extends Component {
           </header>
           <section className="forecast">
             <div className="ico-weather">
-              <img src={getUrlIconWeather()} alt="rain" />
+              <img src={getUrlIconWeather(data.icon)} alt={data.icon} />
             </div>
             <p className="forecast-detail">{data.description}</p>
             <p className="forecast-grade">{data.temp}</p>
