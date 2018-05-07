@@ -6,6 +6,7 @@ import imgSnow from '../assets/png/pack_b/snow.png'
 import imgLightRain from '../assets/png/pack_b/light-rain.png'
 import imgThunderstorm from '../assets/png/pack_b/thunderstorm.png'
 import imgDrizzle from '../assets/png/pack_b/drizzle.png'
+import imgFog from '../assets/png/pack_b/fog.png'
 
 const API_KEY = '25f380e69779eacfe18a294d4679d939'
 const url = `https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${API_KEY}`
@@ -28,6 +29,8 @@ const getUrlIconWeather = weather => {
     return imgThunderstorm
   } else if (weather.includes('drizzle')) {
     return imgDrizzle
+  } else if (weather.includes('fog')) {
+    return imgFog
   }
 }
 

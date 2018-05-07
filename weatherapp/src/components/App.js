@@ -24,9 +24,7 @@ class App extends Component {
         description: '',
         temp: ''
       },
-      weeklyForecast: [
-
-      ]
+      weeklyForecast: []
     }
   }
 
@@ -40,11 +38,18 @@ class App extends Component {
     const responseWeekly = await fetch(`https://api.openweathermap.org/data/2.5/forecast?&APPID=${API_KEY}&lat=${latitude}&lon=${longitude}&units=metric`)
     const dataWeekly = await responseWeekly.json()
 
-    console.log(dataWeekly)
-
     const today = new Date()
     const [ dayWeek, month, day, year ] = today.toDateString().toString().split(' ')
     const date = `${dayWeek}, ${day} ${month} ${year}`
+
+    let filteredDays = []
+    const filteredDataWeekly = dataWeekly.list.filter(dayForecast => {
+      const day = dayForecast.dt_txt.split(' ')[0].split('-')[2]
+      if (!filteredDays.includes(day)) {
+        filteredDays.push(day)
+        return dayForecast
+      }
+    })
 
     this.setState({
       currentlyForecast: {
@@ -53,7 +58,8 @@ class App extends Component {
         icon: (dataCurrently.weather[0].main).toLowerCase(),
         description: dataCurrently.weather[0].description,
         temp: Math.floor(dataCurrently.main.temp)
-      }
+      },
+      weeklyForecast: filteredDataWeekly
     })
   }
 
@@ -73,7 +79,7 @@ class App extends Component {
     return (
       <div className="weather-app">
         <CurrentlyForecast data={this.state.currentlyForecast} />
-        <WeeklyForecast />
+        <WeeklyForecast data={this.state.weeklyForecast} />
       </div>
     );
   }
