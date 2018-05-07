@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import getUrlIconWeather from '../utils'
+import { getUrlIconWeather } from '../utils'
 
 class CurrentlyForecast extends Component {
   render() {

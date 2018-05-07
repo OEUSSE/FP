@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 
-import getUrlIconWeather from '../utils'
+import { getUrlIconWeather, getDateParsed } from '../utils'
 
 class WeeklyForecast extends Component {
   createWeeklyForecast() {
     const data = this.props.data
-    console.log(data)
 
     return data.map(item => {
-      const today = new Date(item.dt_txt)
-      const [dayWeek, month, day, year] = today.toDateString().toString().split(' ')
-      const date = `${dayWeek}, ${day} ${month} ${year}`
-
+      const date = getDateParsed(item.dt_txt)
       const iconWeather = (item.weather[0].main).toLowerCase()
 
       return (
