@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import './styles/weeklyForecast.css'
 
 import getUrlIconWeather from '../utils'
 
 class WeeklyForecast extends Component {
   createWeeklyForecast() {
     const data = this.props.data
+    console.log(data)
 
-    const list = data.map(item => {
-      const today = new Date(item.dt_txt.split(' ')[0])
+    return data.map(item => {
+      const today = new Date(item.dt_txt)
       const [dayWeek, month, day, year] = today.toDateString().toString().split(' ')
       const date = `${dayWeek}, ${day} ${month} ${year}`
 
@@ -26,7 +26,6 @@ class WeeklyForecast extends Component {
         </li>
       )
     })
-    return list
   }
 
   render() {

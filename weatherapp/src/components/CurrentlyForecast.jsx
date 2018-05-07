@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './styles/currentForecast.css'
 
 import getUrlIconWeather from '../utils'
 

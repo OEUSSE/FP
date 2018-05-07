@@ -40,9 +40,9 @@ class App extends Component {
 
     const today = new Date()
     const [ dayWeek, month, day, year ] = today.toDateString().toString().split(' ')
-    const date = `${dayWeek}, ${day} ${month} ${year}`
+    const dateCurrently = `${dayWeek}, ${day} ${month} ${year}`
 
-    let filteredDays = []
+    let filteredDays = [ day ]
     const filteredDataWeekly = dataWeekly.list.filter(dayForecast => {
       const day = dayForecast.dt_txt.split(' ')[0].split('-')[2]
       if (!filteredDays.includes(day)) {
@@ -53,7 +53,7 @@ class App extends Component {
 
     this.setState({
       currentlyForecast: {
-        date,
+        dateCurrently,
         city: `${dataCurrently.name}, ${dataCurrently.sys.country}`,
         icon: (dataCurrently.weather[0].main).toLowerCase(),
         description: dataCurrently.weather[0].description,
