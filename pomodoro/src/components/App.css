@@ -1,0 +1,85 @@
+/* App */
+
+.app {
+  background: orangered;
+  border-radius: 20px;
+  box-shadow: 0px 12px 20px 2px rgba(0, 0, 0, .4);
+  padding: 1em;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Top Controls */
+
+.pomodoro-controls {
+}
+
+.pomodoro-controls .p-control {
+  background: #d23900;
+  /*background-color: var(--top-color);*/
+  /*border: 1px solid #362b65;*/
+  color: white;
+  line-height: 3;
+  padding: 0 4em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.pomodoro-controls .p-control::after {
+  content: "";
+  background-color: #fff;
+  bottom: 0;
+  height: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  transition: all 200ms ease-in;
+}
+
+.pomodoro-controls .p-control:hover::after,
+.pomodoro-controls .p-control:focus::after {
+  height: .2em;
+}
+
+.pomodoro-controls .p-control:nth-child(2) {
+  border-left: none;
+  border-right: none;
+}
+
+/* Timer */
+
+.timer-container {
+  margin: 4em 0;
+  text-align: center;
+}
+
+.timer-container .timer {
+  font-size: 5rem;
+}
+
+/* Bottom Controls */
+
+.timer-controls {
+  display: flex;
+  justify-content: space-around;
+}
+
+.timer-controls .t-control {
+  background: orangered;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  line-height: 4;
+  padding: 0 4em;
+  transition: all 200ms ease-in-out;
+}
+
+.timer-controls .t-control:focus {
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.4);
+  transform: scale(0.95);
+}
