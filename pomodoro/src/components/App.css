@@ -37,7 +37,7 @@
   left: 0;
   position: absolute;
   width: 100%;
-  transition: all 200ms ease-in;
+  transition: all 100ms ease-in;
 }
 
 .pomodoro-controls .p-control:hover::after,
@@ -58,6 +58,7 @@
 }
 
 .timer-container .timer {
+  letter-spacing: 1rem;
   font-size: 5rem;
 }
 
