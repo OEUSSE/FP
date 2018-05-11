@@ -25,33 +25,26 @@ class App extends Component {
     this.resetTimerHandler  = this.resetTimerHandler.bind(this)
   }
 
-  initTimerHandler() {
-    this.setState({ timer: [ 25, 0 ], currentOpt: 'a' })
+  async initTimerHandler() {
+    await this.setState({ timer: [ 25, 0 ], currentOpt: 'a' })
     this.stopTimerHandler()
-    setTimeout(() => {
-      this.startTimerHandler()
-    }, 500)
+    this.startTimerHandler()
   }
 
-  shortBreakHandler() {
-    this.setState({ timer: [ 5, 0 ], currentOpt: 'b' })
+  async shortBreakHandler() {
+    await this.setState({ timer: [ 5, 0 ], currentOpt: 'b' })
     this.stopTimerHandler()
-    setTimeout(() => {
-      this.startTimerHandler()
-    }, 500)
+    this.startTimerHandler()
   }
 
-  longBreakHandler() {
-    this.setState({ timer: [ 10, 0 ], currentOpt: 'c' })
+  async longBreakHandler() {
+    await this.setState({ timer: [ 10, 0 ], currentOpt: 'c' })
     this.stopTimerHandler()
-    setTimeout(() => {
-      this.startTimerHandler()
-    }, 500)
+    this.startTimerHandler()
   }
 
   startTimerHandler() {
     let [min, sec] = this.state.timer
-    console.log([min, sec])
     this.sITimer = setInterval(() => {
       if (min > 0 || sec > 0) {
         if (sec === 0) {
@@ -72,16 +65,14 @@ class App extends Component {
     clearInterval(this.sITimer)
   }
 
-  resetTimerHandler() {
+  async resetTimerHandler() {
     this.stopTimerHandler()
     switch(this.state.currentOpt) {
-      case "a": this.setState({ timer: [ 25, 0 ] }); break;
-      case "b": this.setState({ timer: [ 5, 0 ] }); break;
-      case "c": this.setState({ timer: [ 10, 0 ] }); break;
+      case "a": await this.setState({ timer: [ 25, 0 ] }); break;
+      case "b": await this.setState({ timer: [ 5, 0 ] }); break;
+      case "c": await this.setState({ timer: [ 10, 0 ] }); break;
     }
-    setTimeout(() => {
-      this.startTimerHandler()
-    }, 500)
+    this.startTimerHandler()
   }
 
   render() {
