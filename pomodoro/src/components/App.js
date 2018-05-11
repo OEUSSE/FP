@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   async shortBreakHandler() {
-    await this.setState({ timer: [ 5, 0 ], currentOpt: 'b' })
+    await this.setState({ timer: [ 1, 0 ], currentOpt: 'b' })
     this.stopTimerHandler()
     this.startTimerHandler()
   }
@@ -71,6 +71,7 @@ class App extends Component {
       case "a": await this.setState({ timer: [ 25, 0 ] }); break;
       case "b": await this.setState({ timer: [ 5, 0 ] }); break;
       case "c": await this.setState({ timer: [ 10, 0 ] }); break;
+      default: break;
     }
     this.startTimerHandler()
   }
