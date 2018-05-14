@@ -6,6 +6,8 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import './App.css'
 
 import CurrentlyForecast from './CurrentlyForecast'
@@ -86,6 +88,11 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.PropTypes = {
+  currentlyForecast: PropTypes.object.isRequired,
+  weeklyForecast: PropTypes.array.isRequired
 }
 
 export default App

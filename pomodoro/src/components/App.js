@@ -7,8 +7,8 @@ import Timer from './Timer'
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.sITimer = null
 
@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   async shortBreakHandler() {
-    await this.setState({ timer: [ 1, 0 ], currentOpt: 'b' })
+    await this.setState({ timer: [ 5, 0 ], currentOpt: 'b' })
     this.stopTimerHandler()
     this.startTimerHandler()
   }
