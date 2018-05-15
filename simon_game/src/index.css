@@ -1,5 +1,21 @@
 :root {
+  --green: hsla(147, 100%, 33%);
+  --red: hsla(357, 83%, 34%);
+  --yellow: hsl(49, 93%, 41%);
+  --blue: hsla(211, 88%, 33%);
+  --gray: #333;
 
+  --controls-bkg: #ECE7EE;
+  --text-color: #222;
+
+  --count-output-bkg: #32050C;
+  --count-output-color-off: #430710;
+  --count-output-color-on: #DC0D29;
+
+  --btn-start-color: #FC0102;
+  --btn-strict-color: orangered;
+  --control-on-off-color: #3193DE;
+  --control-on-off-bkg: #222;
 }
 
 *,
@@ -12,5 +28,14 @@
 
 html {
   box-sizing: border-box;
+  font-family: 'Russo One', sans-serif;
   font-size: 16px;
+}
+
+body {
+  align-items: center;
+  background: linear-gradient(120deg, deepskyblue, lightgreen);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
