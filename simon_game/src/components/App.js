@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import './App.css';
 
 import SimonButtonsNotes from './SimonButtonsNotes'
@@ -12,7 +12,7 @@ class App extends Component {
       countOutput: '- -',
       strict: false,
       round: {
-        num: null,
+        num: 0,
         path: []
       }
     }
@@ -23,9 +23,51 @@ class App extends Component {
     this.getNote = this.getNote.bind(this)
   }
 
+  delay(timer) { return new Promise(resolve => setTimeout(resolve, timer * 1000)) }
+
+  getRandomNote() { return Math.floor((Math.random() * (4 - 0)) + 0); }
+
+  createRound() {
+    const keyButton = {
+      0: 'green',
+      1: 'red',
+      2: 'yellow',
+      3: 'blue'
+    }
+
+    const currentStep = this.state.round.num
+
+    this.setState((prevState, currentState) => {
+      return {
+        ...prevState,
+        round: {
+          num: currentStep === 1 ? 1 : currentStep + 1,
+          path: currentStep === 1 ? [this.getRandomNote()] : [].concat([...this.state.round.path], this.getRandomNote())
+        }
+      }
+    })
+
+    const steps = this.state.round.path
+    steps.map(step => {
+      const element = document.querySelector(`.${keyButton[step]}`)
+      element.classList.add('active')
+      this.delay(1).then(_ => element.classList.remove('active'))
+      console.log('aloha')
+    })
+  }
+
   onStartGameHandler() {
     if (this.state.turnOn) {
-
+      document.querySelector('.count-output').classList.add('blink')
+      this.setState({ countOutput: '- -' })
+      this.delay(1.3).then(_ => {
+        this.setState({
+          countOutput: 1,
+          round: { num: 1 }
+        })
+        document.querySelector('.count-output').classList.remove('blink')
+        this.createRound()
+      })
     }
   }
 
@@ -38,7 +80,13 @@ class App extends Component {
 
   onTurnOn() {
     this.setState({
-      turnOn: !this.state.turnOn
+      turnOn: !this.state.turnOn,
+      countOutput: '- -',
+      strict: false,
+      round: {
+        num: 1,
+        path: []
+      }
     })
   }
 
@@ -50,11 +98,11 @@ class App extends Component {
 
   componentDidUpdate() {
     if (this.state.turnOn) {
-      document.querySelector('.count-output').classList.add('on')
+      document.querySelector('.simon-game-app').classList.add('on')
     } else {
-      document.querySelector('.count-output').classList.remove('on')
-      document.querySelector('.count-output').classList.remove('start')
+      document.querySelector('.count-output').classList.remove('blink')
       document.querySelector('.opts-set-a').classList.remove('strict-mode')
+      document.querySelector('.simon-game-app').classList.remove('on')
     }
   }
 
