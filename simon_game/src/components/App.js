@@ -2,6 +2,7 @@
  * TODO: Mostrar correctamente la secuencia de las notas. (👍)
  * TODO: Corregir bug -> Al presionar varias veces y al mismo tiempo el botón start, crea nuevas notas.
  * TODO: Validar la selección de notas: ERRORES y el mínimo tiempo para seleccionar.
+ * TODO: Bloquear las notas cuando el path se esté creando. (👍)
  * TODO: Strict mode
  */
 
@@ -25,7 +26,9 @@ class App extends Component {
       }
     }
 
-    this.userNotes = []
+    this.onCreateRound = false
+    this.currentIndexNote = 0
+    this.hits = 0
     this.count = 0
 
     this.onTurnOn = this.onTurnOn.bind(this)
@@ -46,7 +49,7 @@ class App extends Component {
       3: 'blue'
     }
 
-    this.userNotes = []
+    this.onCreateRound = true
 
     let currentStep = this.state.round.num
 
@@ -65,6 +68,7 @@ class App extends Component {
     }).then(_ => {
       const steps = this.state.round.path
       this.setClassActive(steps, this.count)
+        .then(_ => this.onCreateRound = false)
     })
   }
 
@@ -79,13 +83,14 @@ class App extends Component {
     if (this.count + 1 <= steps.length) {
       const element = document.querySelector(`.${keyButton[steps[c]]}`)
       await this.delay(1)
+      this.setState({ countOutput: this.state.round.num })
       element.classList.add('active')
       await this.delay(1)
       element.classList.remove('active')
       this.count++
       return this.setClassActive(steps, this.count)
     }
-    return this.count = 0
+    return new Promise(resolve => resolve(this.count = 0))
   }
 
   initGame() {
@@ -117,17 +122,28 @@ class App extends Component {
     }
   }
 
-  getNote(note) {
+  async getNote(note) {
     // 👍 - 👎 - 💤 - 📣 - 🔔
-    if (this.state.turnOn && this.state.round.start) {
-      this.userNotes = [].concat([...this.userNotes], note)
-      if (this.userNotes.toString() === this.state.round.path.toString()) {
+    const path = this.state.round.path
+    if (this.state.turnOn && this.state.round.start && !this.onCreateRound) {
+      if (note === path[this.currentIndexNote]) {
+        this.hits = this.hits + 1
+        this.currentIndexNote = this.currentIndexNote + 1
         console.log('👍')
-        this.delay(1).then(_ => {
+        if (path.length === this.hits) {
+          console.log('✨')
+          this.setState({ countOutput: '👍' })
+          await this.delay(1)
           this.createRound()
-        })
+          this.hits = 0
+          this.currentIndexNote = 0
+        }
       } else {
+        this.hits = 0
+        this.currentIndexNote = 0
+        this.setState({ countOutput: '👎' })
         console.log('👎')
+        this.setClassActive(path, this.count)
       }
     }
   }
@@ -142,6 +158,8 @@ class App extends Component {
         path: []
       }
     })
+    this.hits = 0
+    this.currentIndexNote = 0
   }
 
   componentDidUpdate() {
