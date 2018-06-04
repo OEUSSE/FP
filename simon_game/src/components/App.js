@@ -1,9 +1,9 @@
 /**
  * TODO: Mostrar correctamente la secuencia de las notas. (👍)
- * TODO: Corregir bug -> Al presionar varias veces y al mismo tiempo el botón start, crea nuevas notas.
- * TODO: Validar la selección de notas: ERRORES y el mínimo tiempo para seleccionar.
+ * TODO: Corregir bug - > Al presionar varias veces y al mismo tiempo el botón start, crea nuevas notas. (👍)
+ * TODO: Validar la selección de notas: ERRORES y el mínimo tiempo para seleccionar. ()
  * TODO: Bloquear las notas cuando el path se esté creando. (👍)
- * TODO: Strict mode
+ * TODO: Strict mode. (👍)
  */
 
 import React, { Component } from 'react'
@@ -31,13 +31,16 @@ class App extends Component {
     this.hits = 0
     this.count = 0
 
+    this.timeOut = null
+    this.maxTimer = null
+
     this.onTurnOn = this.onTurnOn.bind(this)
     this.onStartGameHandler = this.onStartGameHandler.bind(this)
     this.onStrictModeHandler = this.onStrictModeHandler.bind(this)
     this.getNote = this.getNote.bind(this)
   }
 
-  delay(timer) { return new Promise(resolve => setTimeout(resolve, timer * 1000)) }
+  delay(timer) { return new Promise(resolve => this.timeOut = setTimeout(resolve, timer * 1000)) }
 
   getRandomNote() { return Math.floor((Math.random() * (4 - 0)) + 0); }
 
@@ -48,8 +51,6 @@ class App extends Component {
       2: 'yellow',
       3: 'blue'
     }
-
-    this.onCreateRound = true
 
     let currentStep = this.state.round.num
 
@@ -67,12 +68,15 @@ class App extends Component {
       }))
     }).then(_ => {
       const steps = this.state.round.path
+      this.onCreateRound = true
       this.setClassActive(steps, this.count)
         .then(_ => this.onCreateRound = false)
     })
   }
 
   async setClassActive(steps, c) {
+    const delayTimer = this.state.strict ? .25 : .5
+
     const keyButton = {
       0: 'green',
       1: 'red',
@@ -82,10 +86,10 @@ class App extends Component {
 
     if (this.count + 1 <= steps.length) {
       const element = document.querySelector(`.${keyButton[steps[c]]}`)
-      await this.delay(1)
+      await this.delay(delayTimer)
       this.setState({ countOutput: this.state.round.num })
       element.classList.add('active')
-      await this.delay(1)
+      await this.delay(delayTimer)
       element.classList.remove('active')
       this.count++
       return this.setClassActive(steps, this.count)
@@ -105,6 +109,7 @@ class App extends Component {
   }
 
   onStartGameHandler() {
+    this.resetGame()
     if (this.state.turnOn) {
       document.querySelector('.count-output').classList.add('blink')
       this.setState({ countOutput: '- -' })
@@ -113,6 +118,15 @@ class App extends Component {
         document.querySelector('.count-output').classList.remove('blink')
       })
     }
+  }
+
+  resetGame() {
+    this.hits = 0
+    this.currentIndexNote = 0
+    clearTimeout(this.timeOut)
+    document.querySelectorAll('.press-button').forEach(element => {
+      element.classList.remove('active')
+    })
   }
 
   onStrictModeHandler() {
@@ -160,6 +174,10 @@ class App extends Component {
     })
     this.hits = 0
     this.currentIndexNote = 0
+    clearTimeout(this.timeOut)
+    document.querySelectorAll('.press-button').forEach(element => {
+      element.classList.remove('active')
+    })
   }
 
   componentDidUpdate() {
